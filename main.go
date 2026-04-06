@@ -1,14 +1,13 @@
 package main
 
  import (
-	"decoy/shell"
+	"gopot/shell"
  	"github.com/gliderlabs/ssh"
 	"io"
 	"log"
 	"os"
 	"encoding/json"
 	"net"
-	"golang.org/x/term"
 	)
 
 type LogConnection struct {
@@ -44,28 +43,13 @@ func main() {
 		if err := encoder.Encode(connection); err != nil {
 			panic(err)
 		}
-
+		
 		log.Println("logged new connection")
 		defer file.Close()
 
-		MyShell := shell.NewShell(s)
-
-		// Input loop
-		_, _, isPty := s.Pty()
-		if isPty {
-		    term := term.NewTerminal(s, "user@srv-prod-01:~$ ")
-		    for {
-		        line, err := term.ReadLine()
-		        if err != nil {
-		            break
-		        }
-		        if line == "whoami" {
-		        	_ = MyShell.Whoami()
-		        }
-		        	
-		    }
-		}
-				
+		MyShell := shell.NewInterpreter(s)
+		MyShell.Run()
+	
 	})
 
 	log.Println("starting ssh server on", port, "...")
