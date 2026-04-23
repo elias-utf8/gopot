@@ -32,8 +32,8 @@ func (s *Store) InsertSession(se ssh.Session) (int64, error) {
 	}
 
 	res, err := s.db.Exec(
-		`INSERT INTO sessions (user, remote_ip, remote_port, pubkey, started_at) VALUES (?, ?, ?, ?, ?)`,
-		se.User(), host, port, pubkey, time.Now().UTC().Format(time.RFC3339Nano),
+		`INSERT INTO sessions (user, remote_ip, remote_port, pubkey, client, started_at) VALUES (?, ?, ?, ?, ?, ?)`,
+		se.User(), host, port, pubkey, se.Context().ClientVersion(), time.Now().UTC().Format(time.RFC3339Nano),
 	)
 	if err != nil {
 		return 0, err

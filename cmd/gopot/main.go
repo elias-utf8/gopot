@@ -6,6 +6,7 @@ import (
 	"gopot/internal/shell"
 	"io"
 	"log"
+	"fmt"
 
 	"github.com/gliderlabs/ssh"
 )
@@ -15,6 +16,8 @@ func main() {
 
 	cfg := config.LoadConfig()
 
+	fmt.Println(cfg.Server.Banner)
+	
 	database, err := db.Open("gopot.db")
 	if err != nil {
 		log.Fatal(err)
@@ -39,6 +42,6 @@ func main() {
 		MyShell.Run()
 	})
 
-	log.Println("starting ssh server on", port, "...")
+	log.Println("Starting SSH honeypot on", port, "...")
 	log.Fatal(ssh.ListenAndServe(":2222", nil))
 }

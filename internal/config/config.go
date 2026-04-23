@@ -12,7 +12,7 @@ type Config struct {
 
 type ServerConfig struct {
 	Port int `toml:"port"`
-	Version string `toml:"version"`
+	Banner string `toml:"banner"`
 }
 
 type ShellConfig struct {

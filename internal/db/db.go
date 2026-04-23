@@ -12,9 +12,18 @@ CREATE TABLE IF NOT EXISTS sessions (
 	user        TEXT    NOT NULL,
 	remote_ip   TEXT    NOT NULL,
 	remote_port INTEGER NOT NULL,
+	client      TEXT,
 	pubkey      TEXT,
 	started_at  DATETIME NOT NULL,
 	ended_at    DATETIME
+);
+
+CREATE TABLE IF NOT EXISTS commands (
+	id          INTEGER PRIMARY KEY AUTOINCREMENT,
+	session_id  INTEGER NOT NULL,
+	command     TEXT    NOT NULL,
+	executed_at DATETIME NOT NULL,
+	FOREIGN KEY (session_id) REFERENCES sessions(id) ON DELETE CASCADE
 );
 `
 
