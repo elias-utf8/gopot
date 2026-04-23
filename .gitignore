@@ -30,3 +30,15 @@ go.work.sum
 # Editor/IDE
 # .idea/
 # .vscode/
+
+log.jsonl
+
+# Build output
+/bin/
+/gopot
+/main
+
+# SQLite runtime
+/gopot.db
+/gopot.db-shm
+/gopot.db-wal

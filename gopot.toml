@@ -22,8 +22,6 @@ Expanded Security Maintenance for Applications is not enabled.
 To see these additional updates run: apt list --upgradable
 
 1 additional security updates can be applied with ESM Apps.
-Learn more about enabling ESM Apps service at https://ubuntu.com/esm
-
-Last login: Sun Apr  5 23:20:18 2026 from 
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm 
 """
-prompt = "jetson@jetson-desktop:~$"
+prompt = "jetson@jetson-desktop:~$ "
