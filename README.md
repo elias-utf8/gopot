@@ -13,4 +13,4 @@ The honeypot listens on port `2222` by default. Edit `gopot.toml` to configure t
 
 ## License
 
-MIT
+Apache 2.0
