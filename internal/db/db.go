@@ -20,11 +20,20 @@ CREATE TABLE IF NOT EXISTS sessions (
 
 CREATE TABLE IF NOT EXISTS commands (
 	id          INTEGER PRIMARY KEY AUTOINCREMENT,
-	session_id  INTEGER NOT NULL,
-	command     TEXT    NOT NULL,
-	executed_at DATETIME NOT NULL,
+	session_id  INTEGER 	NOT NULL,
+	command     TEXT    	NOT NULL,
+	executed_at DATETIME 	NOT NULL,
 	FOREIGN KEY (session_id) REFERENCES sessions(id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS auth_attempts (
+	id			INTEGER PRIMARY KEY AUTOINCREMENT,
+	user		TEXT		NOT NULL,
+	password	TEXT		NOT NULL,
+	ip			TEXT 		NOT NULL,
+	attempt_at	DATETIME	NOT NULL,
+	success		BOOLEAN		NOT NULL
+)
 `
 
 func Open(path string) (*sql.DB, error) {

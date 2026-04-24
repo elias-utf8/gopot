@@ -1,6 +1,7 @@
 package shell
 
 import (
+	"fmt"
 	"gopot/internal/config"
 	"github.com/gliderlabs/ssh"
 	"golang.org/x/term"
@@ -20,7 +21,8 @@ func (i *Interpreter) Run() {
 	// Input loop
 	_, _, isPty := i.Session.Pty()
 	if isPty {
-		term := term.NewTerminal(i.Session, i.Cfg.Shell.Prompt)
+		prompt := fmt.Sprintf("%s%s", i.Session.User(), i.Cfg.Shell.Prompt)
+		term := term.NewTerminal(i.Session, prompt)
 		for {
 			line, err := term.ReadLine()
 			if err != nil {

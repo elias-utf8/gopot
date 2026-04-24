@@ -12,9 +12,10 @@ import (
 )
 
 func main() {
-	port := 2222
 
 	cfg := config.LoadConfig()
+	port := cfg.Server.Port
+	addr := fmt.Sprintf(":%d", port)
 
 	fmt.Println(cfg.Server.Banner)
 	
@@ -43,5 +44,5 @@ func main() {
 	})
 
 	log.Println("Starting SSH honeypot on", port, "...")
-	log.Fatal(ssh.ListenAndServe(":2222", nil))
+	log.Fatal(ssh.ListenAndServe(addr, nil))
 }
