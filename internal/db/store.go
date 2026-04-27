@@ -56,3 +56,11 @@ func (s *Store) InsertCommand(sessionID int64, command string) error {
 	)
 	return err
 }
+
+func (s *Store) InsertAuthAttempt(user, password, ip string, success bool) error {
+	_, err := s.db.Exec(
+		`INSERT INTO auth_attempts (user, password, ip, attempt_at, success) VALUES (?, ?, ?, ?, ?)`,
+		user, password, ip, time.Now().UTC().Format(time.RFC3339Nano), success,
+	)
+	return err
+}

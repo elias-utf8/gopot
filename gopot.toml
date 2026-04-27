@@ -1,5 +1,6 @@
 [server]
 port = 2223
+host_key = "host_key"
 banner = '''
              __
   ___ ____  / /____  ___
@@ -31,3 +32,7 @@ To see these additional updates run: apt list --upgradable
 Learn more about enabling ESM Apps service at https://ubuntu.com/esm 
 """
 prompt = "@jetson-desktop:~$ "
+
+[auth]
+# Refuse the first N password attempts per IP, then accept.
+min_attempts = 2
