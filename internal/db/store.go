@@ -48,3 +48,11 @@ func (s *Store) EndSession(id int64) error {
 	)
 	return err
 }
+
+func (s *Store) InsertCommand(sessionID int64, command string) error {
+	_, err := s.db.Exec(
+		`INSERT INTO commands (session_id, command, executed_at) VALUES (?, ?, ?)`,
+		sessionID, command, time.Now().UTC().Format(time.RFC3339Nano),
+	)
+	return err
+}

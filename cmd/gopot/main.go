@@ -1,12 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"gopot/internal/config"
 	"gopot/internal/db"
 	"gopot/internal/shell"
 	"io"
 	"log"
-	"fmt"
 
 	"github.com/gliderlabs/ssh"
 )
@@ -18,28 +18,29 @@ func main() {
 	addr := fmt.Sprintf(":%d", port)
 
 	fmt.Println(cfg.Server.Banner)
-	
+
 	database, err := db.Open("gopot.db")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer database.Close()
 
-	store := db.NewStore(database)
+	session_store := db.NewStore(database)
 
 	ssh.Handle(func(s ssh.Session) {
 		io.WriteString(s, cfg.Shell.Banner)
 
-		sessionID, err := store.InsertSession(s)
+		sessionID, err := session_store.InsertSession(s)
 		if err != nil {
 
 			log.Println("insert session:", err)
 			return
 		}
 		log.Println("logged new connection, session id =", sessionID)
-		defer store.EndSession(sessionID)
+		defer session_store.EndSession(sessionID)
 
-		MyShell := shell.NewInterpreter(s, cfg)
+		shell_store := db.NewStore(database)
+		MyShell := shell.NewInterpreter(s, sessionID, cfg, shell_store)
 		MyShell.Run()
 	})
 
