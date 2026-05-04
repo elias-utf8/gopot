@@ -1,0 +1,12 @@
+services:
+  gopot:
+    build: .
+    image: gopot:latest
+    container_name: gopot
+    restart: unless-stopped
+    ports:
+      - "22:22"
+    volumes:
+      - .:/app
+    working_dir: /app
+
