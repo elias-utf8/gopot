@@ -42,3 +42,7 @@ log.jsonl
 /gopot.db
 /gopot.db-shm
 /gopot.db-wal
+
+# SSH host key
+/host_key
+/host_key.pub

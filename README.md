@@ -9,8 +9,16 @@ An SSH honeypot written in Go.
 
 ## Build & run
 
+Build and generate the host key once:
+
 ```bash
 go build -o bin/gopot ./cmd/gopot/main.go
+ssh-keygen -t ed25519 -f host_key -N ""
+```
+
+Then run:
+
+```bash
 ./bin/gopot
 ```
 
