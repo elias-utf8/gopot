@@ -24,6 +24,10 @@ Then run:
 
 Listens on port `2223` by default. Edit `gopot.toml` to configure the server and shell.
 
+## Production deployment
+
+In order to deploy `gopot` in production, follow this [tutorial](https://eliasgauthier.fr/posts/).
+
 ## License
 
 Apache 2.0
