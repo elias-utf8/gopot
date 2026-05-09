@@ -1,7 +1,6 @@
 services:
   gopot:
     build: .
-    image: gopot:latest
     container_name: gopot
     restart: always
     ports:
